@@ -1,8 +1,9 @@
-package com.example.infinite_scroll
+package com.example.infinite_scroll.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.example.infinite_scroll.R
 import com.example.infinite_scroll.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
 
