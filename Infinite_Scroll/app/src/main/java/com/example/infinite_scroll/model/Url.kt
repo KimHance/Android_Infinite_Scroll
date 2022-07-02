@@ -2,7 +2,7 @@ package com.example.infinite_scroll.model
 
 import com.google.gson.annotations.SerializedName
 
-class Url(
-    @SerializedName("small")
+data class Url(
+    @SerializedName("raw")
     val url : String
 )

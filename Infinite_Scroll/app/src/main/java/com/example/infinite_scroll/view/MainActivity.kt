@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import com.example.infinite_scroll.R
 import com.example.infinite_scroll.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
