@@ -8,5 +8,5 @@ data class Response(
     @SerializedName("total_pages")
     val pages : Int,
     @SerializedName("results")
-    val results : List<Picture>
+    val results : MutableList<Picture>
 )

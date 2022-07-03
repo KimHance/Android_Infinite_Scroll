@@ -9,6 +9,6 @@ import javax.inject.Inject
 class MainRepository @Inject constructor(
     private val unsplashService: UnsplashService
 ) {
-    suspend fun getPhotoList() =
-        unsplashService.getPhotoList()
+    suspend fun getPhotoList(page: Int = 1) =
+        unsplashService.getPhotoList(page)
 }

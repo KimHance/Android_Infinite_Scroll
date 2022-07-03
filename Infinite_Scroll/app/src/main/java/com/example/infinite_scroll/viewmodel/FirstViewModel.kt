@@ -10,7 +10,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.Collections.addAll
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,19 +20,30 @@ class FirstViewModel @Inject constructor(
     private val mainRepository: MainRepository
 ) : ViewModel() {
 
+    var getMorePictureFlag = false
+
     private val _isLoading = MutableLiveData(false)
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
-    private val _pictureList = MutableStateFlow<List<Picture>>(emptyList())
+    private val addItem = MutableStateFlow<List<Picture>>(emptyList())
+
+    private val _pictureList = MutableStateFlow(listOf<Picture>())
     val pictureList: StateFlow<List<Picture>> = _pictureList.asStateFlow()
 
-
-    fun getPictureList(){
+    fun getPictureList(page: Int) {
         viewModelScope.launch {
             _isLoading.value = true
             kotlin.runCatching {
-                _pictureList.value = mainRepository.getPhotoList().results
+                if (!getMorePictureFlag) _pictureList.value = mainRepository.getPhotoList().results
+                else {
+                    addItem.value = mainRepository.getPhotoList(page).results
+                    _pictureList.update {
+                        it.toMutableList().apply {
+                            addAll(addItem.value)
+                        }.toList()
+                    }
+                }
             }.onSuccess {
                 _isLoading.value = false
             }.onFailure {
