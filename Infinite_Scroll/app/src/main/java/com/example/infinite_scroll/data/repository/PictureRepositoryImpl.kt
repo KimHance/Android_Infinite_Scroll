@@ -14,7 +14,7 @@ class PictureRepositoryImpl @Inject constructor(
 ) : PictureRepository {
 
     companion object {
-        private const val PAGE_SIZE = 30
+        const val PAGE_SIZE = 30
     }
 
     override fun getPictureList(): Flow<PagingData<Picture>> =

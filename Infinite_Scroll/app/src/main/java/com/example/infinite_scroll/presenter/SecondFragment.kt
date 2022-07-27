@@ -1,6 +1,7 @@
 package com.example.infinite_scroll.presenter
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,16 +52,23 @@ class SecondFragment : Fragment() {
     private fun collectFlows() {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.picList.collectLatest { picture ->
-                    picturePagingAdapter.submitData(picture)
+                launch {
+                    viewModel.picList.collectLatest { picture ->
+                        picturePagingAdapter.submitData(picture)
+                    }
                 }
-            }
-        }
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                picturePagingAdapter.loadStateFlow.collect() {
-                    if (it.source.prepend is LoadState.Loading) dialog.show()
-                    else dialog.dismiss()
+
+                launch {
+                    picturePagingAdapter.loadStateFlow
+                        .collectLatest {
+                            if (it.source.append is LoadState.Loading) {
+                                Log.d("석주형", "collectFlows: ${it.source.append}")
+                                dialog.show()
+                            } else {
+                                Log.d("석주형", "collectFlows: ${it.source.append}")
+                                dialog.dismiss()
+                            }
+                        }
                 }
             }
         }

@@ -8,7 +8,7 @@ import kotlinx.coroutines.delay
 import okio.IOException
 
 const val STARTING_KEY = 1
-private const val DELAY_MILLIS = 3_000L
+private const val DELAY_MILLIS = 1_000L
 
 class PicturePagingSource(
     private val unsplashService: UnsplashService
