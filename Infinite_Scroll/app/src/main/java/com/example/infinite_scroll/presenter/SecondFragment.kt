@@ -62,10 +62,8 @@ class SecondFragment : Fragment() {
                     picturePagingAdapter.loadStateFlow
                         .collectLatest {
                             if (it.source.append is LoadState.Loading) {
-                                Log.d("석주형", "collectFlows: ${it.source.append}")
                                 dialog.show()
                             } else {
-                                Log.d("석주형", "collectFlows: ${it.source.append}")
                                 dialog.dismiss()
                             }
                         }

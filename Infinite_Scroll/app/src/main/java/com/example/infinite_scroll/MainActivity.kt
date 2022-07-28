@@ -20,9 +20,9 @@ class MainActivity : AppCompatActivity() {
         val tab1 = FirstFragment()
         val tab2 = SecondFragment()
 
-        supportFragmentManager.beginTransaction().add(R.id.frameLayout, tab1).commit()
+        supportFragmentManager.beginTransaction().add(R.id.frameLayout, tab2).commit()
 
-        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        /*binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (tab?.position) {
                     0 -> {
@@ -39,13 +39,13 @@ class MainActivity : AppCompatActivity() {
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
-        })
+        })*/
 
     }
 
-    private fun replaceView(tab: Fragment) {
+    /*private fun replaceView(tab: Fragment) {
         tab.let {
             supportFragmentManager.beginTransaction().replace(R.id.frameLayout, it).commit()
         }
-    }
+    }*/
 }
